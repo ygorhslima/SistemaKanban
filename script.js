@@ -9,10 +9,10 @@ class KanbanColumn {
     constructor(titulo, cor) {
         this.titulo = titulo;
         this.cor = cor;
-        this.element = this.createElement();
+        this.element = this.configuracaoKanbanColumn();
     }
 
-    createElement() {
+    configuracaoKanbanColumn() {
         /**ÁREA DE ESTILOS INLINE (poderia estar no CSS)*/
         const ESTILO_kanban_column = `
             display: flex;
