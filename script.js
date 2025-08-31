@@ -128,10 +128,38 @@ class KanbanCard {
         this.dataCard = dados.data;
         // **Ajuste 3: Chama o método que cria o elemento no construtor**
         this.element = this.createElement();
+        this.gridCards = this.element.querySelector(".grid_cards")
+
+
+        // Adiciona os listeners de drop aqui
+        this.gridCards.addEventListener("dragover", e => {
+            e.preventDefault();
+            this.gridCards.classList.add("cards-hover");
+        });
+
+        this.gridCards.addEventListener("dragleave", e => {
+            this.gridCards.classList.remove("cards-hover");
+        });
+
+        this.gridCards.addEventListener("drop", e => {
+            e.preventDefault();
+            this.gridCards.classList.remove("cards-hover");
+
+            // Recupera o ID do card
+            const cardId = e.dataTransfer.getData("text/plain");
+            const draggedCard = document.querySelector(`.kanban-card[data-id="${cardId}"]`);
+
+            // Adiciona o card à nova coluna
+            this.gridCards.appendChild(draggedCard);
+
+            // TODO: Lembre-se de atualizar os dados do card no seu "estado" ou localStorage
+        });
+
     }
 
     // **Ajuste 4: Renomeado para `createElement` e retorna o elemento criado**
     createElement() {
+
         const kanban_card = document.createElement("div");
         kanban_card.className = "kanban-card";
         kanban_card.draggable = true;
@@ -152,6 +180,11 @@ class KanbanCard {
         kanban_card.appendChild(card_title);
         kanban_card.appendChild(card_description);
         kanban_card.appendChild(card_data);
+
+
+        const grid_cards = document.createElement("div");
+        grid_cards.className = "grid_cards";
+        grid_cards.style.cssText = ESTILO_grid_cards;
 
         return kanban_card;
     }
