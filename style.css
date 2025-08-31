@@ -23,11 +23,14 @@ body{
     overflow-x: auto;
 }
 
-.grid-card{
+.grid_cards{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2,1fr);
     grid-auto-rows: 1fr;
     grid-auto-columns: 1fr;
+    width: 100%;
+    height: 100%;
 }
 
 .kanban-cards{
@@ -41,7 +44,7 @@ body{
 .kanban-card{
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     border-radius: 14px;
     padding: 10px;
     box-shadow: 0px 5px 5px -3px rgba(0,0,0, 0.1);
